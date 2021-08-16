@@ -1,0 +1,50 @@
+.Banner {
+	background: white;
+	position: relative;
+	background-color: var(--violet);
+}
+
+.Banner .Container {
+	padding: 8em 1rem 2em;
+}
+
+.Banner__Info {
+	text-align: center;
+	max-width: 650px;
+	margin: 0 auto;
+}
+
+.Banner__Info h1 {
+	font-size: 3em;
+	font-weight: 700;
+	color: var(--light-pink);
+}
+
+.Banner__Info h1 span {
+	color: white;
+}
+
+.Banner__Info p {
+	margin-top: 1rem;
+	margin-bottom: 2em;
+	color: #eaeaec;
+}
+
+.Banner #wave {
+	position: absolute;
+	top: calc(100% - 1rem);
+	left: 0; 
+	right: 0;
+	z-index: 100;
+	filter: drop-shadow(2px 9px 3px rgba(0, 0, 0, 0.1));
+}
+
+@media (max-width: 768px) {
+	.Banner .Container {
+		padding: 8em 1rem 6em;
+	}
+
+	.Banner__Info {
+		text-align: left;
+	}
+}
