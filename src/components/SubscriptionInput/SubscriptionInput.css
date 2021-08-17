@@ -17,10 +17,19 @@
 	border: none;
 	max-width: 500px;
 	height: 100%;
+	background-color: rgba(255, 255, 255, 0.85);
+
+	transition: 0.25s;
 }
 
 .SubscriptionInput--Input:focus {
 	outline: none;
+	background-color: white;
+}
+
+.SubscriptionInput--Input:disabled {
+	cursor: not-allowed;
+	background-color: var(--light-pink);
 }
 
 .SubscriptionInput--Button {
@@ -38,4 +47,44 @@
 .SubscriptionInput--Button:hover {
 	background-color: white;
 	color: var(--pink);
+}
+
+.SubscriptionInput--Button:disabled {
+	background-color: var(--light-pink);
+	color: white;
+	cursor: not-allowed;
+}
+
+.SubscriptionInput--Button.Loading {
+	cursor: pointer;
+	background-color: white;
+}
+
+.SubscriptionInput--Button.Loading span:last-child {
+	display: none;
+}
+
+.SubscriptionInput--Button.Loading span:not(:last-child) {
+	display: inline-block;
+
+	width: 10px;
+	height: 10px;
+	margin-left: 0.5em;
+	background-color: var(--light-pink);
+
+	border-radius: 50%;
+
+	animation: bounce 0.6s ease-in-out 0.6s infinite;
+}
+
+.SubscriptionInput--Button.Loading span:nth-child(2) {
+	animation-delay: 0.8s;
+}
+
+.SubscriptionInput--Button.Loading span:nth-child(3) {
+	animation-delay: 1.6s;
+}
+
+@keyframes bounce {
+	50% { transform: translateY(0.4em); }
 }
