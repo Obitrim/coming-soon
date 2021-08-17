@@ -1,17 +1,32 @@
 import React, { useState, useRef } from 'react';
+import swal from "sweetalert";
+
 import "./SubscriptionInput.css";
-// import { db } from "../../firebase.js";
+import { db } from "../../firebase.js";
 
 const SubscriptionInput = ({ focus, ...props }) => {
 	const [email, setEmail] = useState("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const emailInput = useRef(null);
 
 	function handleOnSubmit(evt) {
 		evt.preventDefault();
 		if (email.trim() !== "" && isValidEmail(email)) {
-			// db.collection("email-list").add({ email }).then(docRef => {
-			// 	alert("Successful");
-			// }).catch(error => alert("Failed"));
+			setIsSubmitting(true);
+			db.collection("email-list").where("email", "==", email)
+				.get()
+				.then(querySnapshot => {
+					if (querySnapshot.docs.length === 0) {
+						db.collection("email-list").add({ email }).then(docRef => {
+							swal("Hurray!! Welcome 🤗", "You will be the first to know when we are in operation", "success")
+								.then(() => setEmail(""))
+						}).catch(error => alert("Failed"))
+					} else {
+						swal("Existing Account", `${email} has already been subscribed`, "error")
+					}
+				})
+				.catch(err => swal("Something broke 😞", "An error occured while subscribing. Check your network connection and try again", "error"))
+				.finally(() => setIsSubmitting(false))
 		}
 	}
 
@@ -34,8 +49,18 @@ const SubscriptionInput = ({ focus, ...props }) => {
 				onChange={evt => setEmail(evt.target.value)} 
 				value={email} 
 				ref={emailInput}
+				disabled={isSubmitting}
 			/>
-			<button type="submit" className="SubscriptionInput--Button">Subscribe</button>
+			<button 
+				type="submit" 
+				className={`SubscriptionInput--Button ${isSubmitting && 'Loading'}`} 
+				disabled={isSubmitting || email.trim() === ""}
+			>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span>Subscribe</span>
+			</button>
 		</form>
 	)
 }
