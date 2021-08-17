@@ -1,0 +1,37 @@
+.NavBar {
+	background-color: var(--violet);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+}
+
+.NavBar .Container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: var(--header-h);
+}
+
+.NavBar__NotifyMe {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	background-color: white;
+	color: var(--violet);
+	-webkit-backdrop-filter: blur(3px);
+	backdrop-filter: blur(3px);
+	border-radius: 0 0.5rem 0 0.5rem;
+	text-decoration: none;
+	color: var(--violet);
+	transition: 0.25s ease-in-out;
+}
+
+.NavBar__NotifyMe:hover {
+	opacity: 0.9;
+	box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.3);
+}
+
+.NavBar__Logo {
+	color: var(--pink);
+}
