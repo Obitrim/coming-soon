@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import swal from "sweetalert";
+
 import "./SubscriptionInput.css";
 import { db } from "../../firebase.js";
 
